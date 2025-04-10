@@ -126,12 +126,18 @@ func clear_geometry_instances():
 	for child in geometry_root.get_children():
 		#print_debug(child.name)
 		#remove_child(child)
-		child.queue_free()
+		clear_children(child)
 
 	geometry.clear()
 	#	Clear colliders
 	#clear_colliders()
 
+
+func clear_children(root_node : Node3D):
+	for child in root_node.get_children():
+		child.queue_free()
+	root_node.queue_free()
+	
 	
 func clear_colliders():
 
@@ -162,10 +168,14 @@ func instanstiate_geometry():
 		instance.set_rotation(data.rotation)
 		instance.set_scale(data.scale)
 
+		var instance_name = instance.name + "-" + generate_unique_string(8)
+		instance.name = instance_name
+
 		geometry_root.add_child(instance)
 		instance.set_owner(get_tree().edited_scene_root)
 
 		var group_data = geometry[data.group_idx]
+
 		#if group_data.add_colliders:
 			
 			#	generate_colliders()
@@ -325,3 +335,11 @@ func find_height_at(x : float, z : float, minimum_slope : float, collision_mask 
 	else:
 		return null
 	
+
+const ascii_letters_and_digits = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+func generate_unique_string(sring_length: int) -> String:
+
+	var result = ""
+	for i in range(sring_length):
+		result += ascii_letters_and_digits[randi() % ascii_letters_and_digits.length()]
+	return result
