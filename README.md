@@ -8,12 +8,12 @@ Attached to the root node of any scene, this scripts allows you to spawn groups 
 ## Features
 
 - Allows multiple groups of multiple prefabs to instantiate
+- Randomize scale and rotation for every instance
 
 
 ## Features pending
 
 - Allow creating colliders during the process
-- Randomize size and rotation for every instance
 - Create chunk to optimize visualization
 - Better solution to avoid blocking editor while running the script
 

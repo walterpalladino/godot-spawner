@@ -157,7 +157,11 @@ func instanstiate_geometry():
 	for data in geometry:
 	
 		var instance = instantiatable_objects[data.group_idx].prefabs[data.prefab_idx].instantiate()
+
 		instance.position = data.position
+		instance.set_rotation(data.rotation)
+		instance.set_scale(data.scale)
+
 		geometry_root.add_child(instance)
 		instance.set_owner(get_tree().edited_scene_root)
 
@@ -264,7 +268,16 @@ func generate_geometry(group_idx : int):
 			if height != null:
 				## Set position for the instance
 				instance_position.y = height
-				geometry.append(InstantiatableGeometry.new(group_idx, prefab_idx, instance_position))
+				
+				# Rotate the instance
+				var instance_basis = Basis()
+				instance_basis = instance_basis.rotated(Vector3.UP, 2.0 * PI * rng.randf() )
+
+				# Scale the mesh
+				var scale_factor = rng.randf_range(0.75, 1.50)
+				var instance_scale = Vector3(scale_factor, scale_factor, scale_factor)
+				
+				geometry.append(InstantiatableGeometry.new(group_idx, prefab_idx, instance_position, instance_basis.get_euler(), instance_scale))
 
 
 func exists_overlap(position : Vector3, min_distance : float) -> bool:
