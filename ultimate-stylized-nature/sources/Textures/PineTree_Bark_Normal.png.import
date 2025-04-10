@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgn87rhe86ino"
-path.s3tc="res://.godot/imported/PineTree_Bark_Normal.png-cef649b8c195d18ef2f8562e030c4b52.s3tc.ctex"
+path="res://.godot/imported/PineTree_Bark_Normal.png-cef649b8c195d18ef2f8562e030c4b52.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://ultimate-stylized-nature/sources/Textures/PineTree_Bark_Normal.png"
-dest_files=["res://.godot/imported/PineTree_Bark_Normal.png-cef649b8c195d18ef2f8562e030c4b52.s3tc.ctex"]
+dest_files=["res://.godot/imported/PineTree_Bark_Normal.png-cef649b8c195d18ef2f8562e030c4b52.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

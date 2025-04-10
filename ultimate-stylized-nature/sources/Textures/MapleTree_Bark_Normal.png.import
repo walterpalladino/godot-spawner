@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dth8gewh27nfb"
-path.s3tc="res://.godot/imported/MapleTree_Bark_Normal.png-17c6dde41c267735b44a8412e76ae470.s3tc.ctex"
+path="res://.godot/imported/MapleTree_Bark_Normal.png-17c6dde41c267735b44a8412e76ae470.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://ultimate-stylized-nature/sources/Textures/MapleTree_Bark_Normal.png"
-dest_files=["res://.godot/imported/MapleTree_Bark_Normal.png-17c6dde41c267735b44a8412e76ae470.s3tc.ctex"]
+dest_files=["res://.godot/imported/MapleTree_Bark_Normal.png-17c6dde41c267735b44a8412e76ae470.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

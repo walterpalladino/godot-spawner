@@ -278,6 +278,8 @@ func generate_geometry(group_idx : int):
 			if height != null:
 				## Set position for the instance
 				instance_position.y = height
+				#	Adjust it using the offset. Could be useful to be sure model looks grounded
+				instance_position += group_data.position_offset
 				
 				# Rotate the instance
 				var instance_basis = Basis()
