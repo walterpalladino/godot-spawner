@@ -1,6 +1,8 @@
 extends Resource
 class_name InstantiatableObject
 
+@export var enabled : bool = true
+
 @export var prefabs : Array[PackedScene] = [] 
 
 @export_range(0.0, 1.0) var minimum_slope : float = 0.5 

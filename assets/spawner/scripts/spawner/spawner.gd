@@ -12,6 +12,7 @@ const InstantiatableGeometry = preload("res://assets/spawner/scripts/spawner/ins
 @export_group("Terrain Settings")
 @export var terrain_size = 20
 @export var terrain_offset : Vector3 = Vector3.ZERO
+@export_flags_2d_physics var clear_area_layer : int 	# 24 : 8388608 - 32 : 2147483648
 
 @export_group("Noise Settings")
 @export var noise_seed : int = 0
@@ -252,6 +253,9 @@ func generate_geometry(group_idx : int):
 	print("generate_geometry for group : " + str(group_idx))
 	var group_data : InstantiatableObject = instantiatable_objects[group_idx]
 
+	if !group_data.enabled:
+		return
+
 	if group_data.prefabs.size() == 0:
 		print("instantiatable_objects[0].prefabs is empty")
 		return
@@ -322,7 +326,7 @@ func generate_random_position() -> Vector3 :
 
 
 func find_height_at(x : float, z : float, minimum_slope : float, collision_mask : int):
-	
+
 	#RayCast3D
 	var origin = Vector3(x, 1000, z)
 	var target = origin  + Vector3(0, -1000, 0)
@@ -331,9 +335,14 @@ func find_height_at(x : float, z : float, minimum_slope : float, collision_mask 
 	
 	var query = PhysicsRayQueryParameters3D.create(origin, target)
 	query.collision_mask = collision_mask
+	
 	var result = space_state.intersect_ray(query)
 
 	if result:
+		
+		if result["collider"].collision_layer & clear_area_layer:
+			return null
+			
 		if (result["normal"].y < minimum_slope):
 			return null
 		else:
