@@ -259,6 +259,7 @@ func generate_geometry(group_idx : int):
 	var max_range_value = terrain_size / group_data.dispersion
 	max_range_value *= max_range_value
 	print("max qty of instances : " + str(max_range_value))
+	
 	for i in range(0, max_range_value):
 
 		var instance_position : Vector3 = generate_random_position()
@@ -276,20 +277,23 @@ func generate_geometry(group_idx : int):
 			var height = find_height_at(instance_position.x, instance_position.z, group_data.minimum_slope, group_data.collision_mask)
 
 			if height != null:
-				## Set position for the instance
-				instance_position.y = height
-				#	Adjust it using the offset. Could be useful to be sure model looks grounded
-				instance_position += group_data.position_offset
-				
-				# Rotate the instance
-				var instance_basis = Basis()
-				instance_basis = instance_basis.rotated(Vector3.UP, 2.0 * PI * rng.randf() )
 
-				# Scale the mesh
-				var scale_factor = rng.randf_range(0.75, 1.50)
-				var instance_scale = Vector3(scale_factor, scale_factor, scale_factor)
-				
-				geometry.append(InstantiatableGeometry.new(group_idx, prefab_idx, instance_position, instance_basis.get_euler(), instance_scale))
+				if height >= group_data.minimum_altitude and height <= group_data.maximum_altitude:
+
+					## Set position for the instance
+					instance_position.y = height
+					#	Adjust it using the offset. Could be useful to be sure model looks grounded
+					instance_position += group_data.position_offset
+					
+					# Rotate the instance
+					var instance_basis = Basis()
+					instance_basis = instance_basis.rotated(Vector3.UP, 2.0 * PI * rng.randf() )
+
+					# Scale the mesh
+					var scale_factor = rng.randf_range(0.75, 1.50)
+					var instance_scale = Vector3(scale_factor, scale_factor, scale_factor)
+					
+					geometry.append(InstantiatableGeometry.new(group_idx, prefab_idx, instance_position, instance_basis.get_euler(), instance_scale))
 
 
 func exists_overlap(position : Vector3, min_distance : float) -> bool:

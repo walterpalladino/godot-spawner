@@ -9,6 +9,7 @@ Attached to the root node of any scene, this scripts allows you to spawn groups 
 
 - Allows multiple groups of multiple prefabs to instantiate
 - Randomize scale and rotation for every instance
+- Allows set altitude range for spawning each group
 
 
 ## Features pending
