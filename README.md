@@ -13,11 +13,11 @@ Attached to the root node of any scene, this scripts allows you to spawn groups 
 - Groups will be placed only on matching layers. Usually, the same layer used by the terrain
 - Randomize scale and rotation for every prefab instance
 - Allow filler areas to avoid prefab placement or manual placement of other models
+- Creating colliders during the process
 
 
 ## Features pending
 
-- Creating colliders during the process
 - Create chunk to optimize visualization
 - Better solution to avoid blocking editor while running the script
 

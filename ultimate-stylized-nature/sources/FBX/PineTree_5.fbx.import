@@ -31,7 +31,15 @@ animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
+_subresources={
+"nodes": {
+"PATH:PineTree_5": {
+"mesh_instance/visibility_range_begin_margin": 5.0,
+"mesh_instance/visibility_range_end": 35.0,
+"mesh_instance/visibility_range_end_margin": 10.0
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1

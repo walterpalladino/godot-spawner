@@ -175,78 +175,32 @@ func instanstiate_geometry():
 		geometry_root.add_child(instance)
 		instance.set_owner(get_tree().edited_scene_root)
 
-		var group_data = geometry[data.group_idx]
+		var group_data : InstantiatableObject = instantiatable_objects[data.group_idx]
 
-		#if group_data.add_colliders:
-			
-			#	generate_colliders()
-
+		if group_data.add_colliders and group_data.custom_collision_shape != null:
+			generate_colliders(instance, group_data)
 
 
-func generate_colliders():
 
-	print_debug("generate_colliders")
+func generate_colliders(instance : Node3D, group_data : InstantiatableObject):
+
+	print_debug("generate_colliders for instance : " + instance.name)
 	
-	#var new_node = Node3D.new()
-	#add_child(new_node)
-	#new_node.owner = owner
-	
-	#var new_node = Node3D.new()
-	#$"../StaticBody3D".add_child(new_node)
-	#new_node.owner = $"../StaticBody3D".owner
-	#
-	#var static_body = StaticBody3D.new()
-	#new_node.add_child(static_body)
-	#static_body.owner = new_node.owner
-	 #
-	#var collision_shape = CollisionShape3D.new()
-#
-	#var box : BoxShape3D = BoxShape3D.new()
-	#box.size = Vector3(4.0,4.0,4.0)
-	#collision_shape.shape = box
-	#collision_shape.global_transform = Transform3D(Basis(), Vector3(0.0, 0.0, 0.0))
-#
-	#static_body.add_child(collision_shape)
-	#collision_shape.owner = static_body.owner
-	
-	#var static_body = StaticBody3D.new()
-	#add_child(static_body)
-	#static_body.owner = owner
-
-	#var collision_shape = CollisionShape3D.new()
-	#var box : BoxShape3D = BoxShape3D.new()
-	#box.size = Vector3(4.0,4.0,4.0)
-	#collision_shape.shape = box
-	#collision_shape.global_transform = Transform3D(Basis(), Vector3(0.0, 0.0, 0.0))
-
-	#static_body.add_child(collision_shape)
-	
-	# Re-use the same shape
-	#var shape = multimesh.mesh.create_trimesh_shape()
-	
-	var box_shape : BoxShape3D = BoxShape3D.new()
-	#box_shape.size = custom_collision_size
-	
-
 	# Create one static body
 	var collision_parent = StaticBody3D.new()
-	#$"..".add_child(collision_parent)
-	add_child(collision_parent)
-	#collision_parent.owner = $".."
-	collision_parent.owner = owner
-	collision_parent.set_as_top_level(true)
+	instance.add_child(collision_parent)
+	collision_parent.owner = instance.owner
+	collision_parent.set_as_top_level(true)	
 
-	#for i in multimesh.visible_instance_count:
+	#	Create the collision shape
+	var collider = CollisionShape3D.new()
+	collider.shape = group_data.custom_collision_shape
+	collider.position += group_data.custom_collision_offset 
 
-		# Create many collision shapes
-	#	var collider = CollisionShape3D.new()
-	#	collider.shape = box_shape
-	#	collider.global_transform = Transform3D(Basis(), geometry_transforms[i].origin + Vector3(0.0, box_shape.size.y / 2.0, 0.0) + custom_collision_offset)
-		#collider.shape = shape
-		#collider.global_transform = geometry_transforms[i]
-
-	#	collision_parent.add_child(collider)
-	#	collider.owner = collision_parent.owner
+	collision_parent.add_child(collider)
+	collider.owner = collision_parent.owner
+			
+	return
 
 
 func generate_geometry(group_idx : int):

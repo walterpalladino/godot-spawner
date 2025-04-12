@@ -18,4 +18,3 @@ class_name InstantiatableObject
 @export var add_colliders : bool = true
 @export var custom_collision_shape : Shape3D
 @export var custom_collision_offset : Vector3
-@export var custom_collision_size : Vector3 = Vector3(0.5, 2.0, 0.5)
